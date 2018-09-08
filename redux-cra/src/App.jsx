@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 
 import './App.css';
 import MovieList from './components/MovieList';
-import * as actionCreators from './actions/MovieListActions';
+import MovieSelection from './components/MovieSelection'
+import * as actionCreators from './actions/MovieSelectionActions';
 
 
 class App extends Component {
 
   componentDidMount() {
-    this.props.getBatmanList();
+    this.props.getMovieList('batman');
   }
 
   render() {
-    const { getBatmanList } = this.props;
-    const { movies } = this.props;
+    const { movies, selection, getMovieList } = this.props;
     return (
       <div className="App">
+        <MovieSelection 
+          value={selection}
+          onChange={(e) => getMovieList(e)}
+        />
         <MovieList movies={movies}/>
       </div>
     );
@@ -25,7 +28,8 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  movies: state.movieList.movies
+  movies: state.movieSelection.movies,
+  selection: state.movieSelection.selection
 })
 
 const mapDispatchToProps = {
