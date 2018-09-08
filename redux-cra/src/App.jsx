@@ -2,36 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
-import logo from './logo.svg';
 import './App.css';
-import * as actionCreators from './actions/simpleAction';
+import MovieList from './components/MovieList';
+import * as actionCreators from './actions/MovieListActions';
 
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.getBatmanList();
+  }
+
   render() {
     const { getBatmanList } = this.props;
+    const { movies } = this.props;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <pre>
-         {
-          JSON.stringify(this.props)
-         }
-        </pre>
-        <Button bsStyle="primary" onClick={getBatmanList}>Test redux action</Button>
+        <MovieList movies={movies}/>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  ...state
+  movies: state.movieList.movies
 })
 
 const mapDispatchToProps = {

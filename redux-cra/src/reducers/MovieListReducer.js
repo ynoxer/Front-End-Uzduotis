@@ -1,8 +1,10 @@
+
 export default (state = {}, action) => {
  switch (action.type) {
-  case 'SIMPLE_ACTION':
+  case 'GET_BATMAN_LIST':
    return {
-    result: action.payload
+    ...state,
+    movies: action.content.data.Search
    }
   default:
    return state
