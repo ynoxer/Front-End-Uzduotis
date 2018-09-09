@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './App.css';
 import MovieList from './components/MovieList';
 import MovieSelection from './components/MovieSelection'
-import * as actionCreators from './actions/MovieSelectionActions';
+import * as actionCreators from './actions/MovieListActions';
 
 
 class App extends Component {
@@ -14,22 +14,29 @@ class App extends Component {
   }
 
   render() {
-    const { movies, selection, getMovieList } = this.props;
+    const { movies, movie_selection, sort_selection, getMovieList, sortMovieList } = this.props;
     return (
       <div className="App">
+        <h1 className="header">Movies</h1>
         <MovieSelection 
-          value={selection}
+          value={movie_selection}
           onChange={(e) => getMovieList(e)}
         />
-        <MovieList movies={movies}/>
+        <MovieList
+          movies={movies}
+          value={sort_selection}
+          onChange={(e) => sortMovieList(e)}
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  movies: state.movieSelection.movies,
-  selection: state.movieSelection.selection
+  movies: state.movieList.movies,
+  movie_selection: state.movieList.movie_selection,
+  sort_selection: state.movieList.sort_selection
+
 })
 
 const mapDispatchToProps = {

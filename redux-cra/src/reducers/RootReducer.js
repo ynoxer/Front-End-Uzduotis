@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import movieSelection from './MovieSelectionReducer';
+import movieList from './MovieListReducer';
 
 
 export default combineReducers({
-  movieSelection
+  movieList
 });

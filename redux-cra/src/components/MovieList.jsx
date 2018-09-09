@@ -1,8 +1,8 @@
 import React from 'react';
-import { Panel, Table } from 'react-bootstrap';
+import { Panel, Table, ToggleButtonGroup, ToggleButton, Glyphicon } from 'react-bootstrap';
 
 
-const MovieList = ({movies}) => { 
+const MovieList = ({movies, value, onChange}) => { 
 
   const mapMovies = () => {
     if (movies) {
@@ -22,21 +22,51 @@ const MovieList = ({movies}) => {
   return (
     <Panel className="movie-list">
       <Panel.Heading>
-        <Panel.Title componentClass="h3">Movies List</Panel.Title>
+        <Panel.Title>Movies List</Panel.Title>
       </Panel.Heading>
       <Panel.Body>
         <Table> 
           <thead> 
             <tr> 
-              <th>Title</th> 
-              <th>Years</th> 
+              <th>
+                Title
+                <ToggleButtonGroup
+                  className="button-sort"
+                  type="radio"
+                  name="selection"
+                  value={value}
+                  onChange={onChange}
+                >
+                  <ToggleButton value={1}>
+                    <Glyphicon glyph="arrow-up"/>
+                  </ToggleButton>
+                  <ToggleButton value={2}>
+                    <Glyphicon glyph="arrow-down"/>
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              </th> 
+              <th>
+                Years
+                <ToggleButtonGroup
+                  className="button-sort"
+                  type="radio"
+                  name="selection"
+                  value={value}
+                  onChange={onChange}
+                >
+                  <ToggleButton value={3}>
+                    <Glyphicon glyph="arrow-up"/>
+                  </ToggleButton>
+                  <ToggleButton value={4}>
+                    <Glyphicon glyph="arrow-down"/>
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              </th> 
             </tr> 
           </thead> 
-          <tbody> 
-            {
-              mapMovies()
-            }
-          </tbody> 
+          <tbody>
+            { mapMovies() }
+          </tbody>
         </Table> 
       </Panel.Body>
     </Panel>

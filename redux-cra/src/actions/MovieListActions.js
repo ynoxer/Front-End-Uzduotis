@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getMovieList = (selection) => dispatch => {
   dispatch({
-    type: 'SET_SELECTION',
+    type: 'SET_MOVIE_SELECTION',
     selection: selection
   })
   let url = 'http://www.omdbapi.com/?s=' + selection + '&apikey=a4ecd086&';
@@ -11,5 +11,12 @@ export const getMovieList = (selection) => dispatch => {
       type: 'GET_MOVIE_LIST',
       content: response
     }) 
+  })
+}
+
+export const sortMovieList = (selection) => dispatch => {
+  dispatch({
+    type: 'SORT_MOVIE_LIST',
+    selection: selection
   })
 }
